@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up Form</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(178, 174, 196);
+           }
+          
+        .container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 40px;
+            border: 1px solid #160808;
+            border-radius: 5px;
+            background-color: rgb(153, 195, 207);
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #149c4dd7;
+            border-radius: 3px;
+        }
+        button {
+            width: 105%;
+            padding: 10px;
+            background-color: #23be97;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #b30054;
+        }
+        .validation-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hello Welcome!!</h2>
+        <h2>Sign-up</h2>
+        <form id="signupForm" onsubmit="return validateForm()">
+            <label for="email">Enter Your Email:</label>
+            <input type="text" id="email" name="email" required>
+            <div id="emailValidation" class="validation-message"></div>
+            
+            <label for="password">Enter Your Valid Password:</label>
+            <input type="password" id="password" name="password" required>
+            <div id="passwordValidation" class="validation-message"></div>
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            var passwordPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$/;
+
+            var emailValidation = document.getElementById('emailValidation');
+            var passwordValidation = document.getElementById('passwordValidation');
+            
+            emailValidation.innerHTML = '';
+            passwordValidation.innerHTML = '';
+
+            if (!emailPattern.test(email)) {
+                emailValidation.innerHTML = 'Invalid email address. Please enter a valid email.';
+                return false;
+            }
+
+            if (!passwordPattern.test(password)) {
+                passwordValidation.innerHTML = 'Invalid password. Password must have:<br>' +
+                    '- At least 8 characters<br>' +
+                    '- At least one uppercase letter<br>' +
+                    '- At least one special character (!@#$%^&*)<br>' +
+                    '- At least one number';
+                return false;
+            }
+
+            alert("Sign-up Successful!");
+            return true;
+        }
+    </script>
+</body>
+</html>
